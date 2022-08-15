@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartModule } from 'angular2-chartjs';
 import { NgChartsModule } from 'ng2-charts';
+import {DataTablesModule} from 'angular-datatables';
+
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -15,7 +17,6 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PreguntasComponent } from './componentes/preguntas/preguntas.component';
 import { EncabezadoComponent } from './componentes/encabezado/encabezado.component';
-
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { EncabezadoComponent } from './componentes/encabezado/encabezado.compone
     BrowserModule,
     ChartModule,
     NgChartsModule,
+    DataTablesModule,
     FormsModule,
     SweetAlert2Module.forRoot(),
     SweetAlert2Module.forChild(),

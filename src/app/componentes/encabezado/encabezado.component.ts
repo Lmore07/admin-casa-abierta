@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
 import Swal from 'sweetalert2';
-import { ChartOptions, ChartType } from 'chart.js';
+import { ChartOptions } from 'chart.js';
 import { PreguntasServiceService } from 'src/app/preguntas-service.service';
 
 @Component({
@@ -9,12 +10,16 @@ import { PreguntasServiceService } from 'src/app/preguntas-service.service';
   templateUrl: './encabezado.component.html',
   styleUrls: ['./encabezado.component.css'],
 })
-export class EncabezadoComponent implements OnInit {
+export class EncabezadoComponent implements OnInit, AfterViewInit {
   //variables
   pregunta_texto: string;
   opcion_a: any;
   opcion_b: any;
   opcion_c: any;
+// datatable
+  @ViewChild(DataTableDirective)
+  datatableElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {dom: 'Bfrtip'};
 
   tabla=false;
   datos:any;
@@ -35,9 +40,35 @@ export class EncabezadoComponent implements OnInit {
 
   constructor(public ruta: Router, public servicio: PreguntasServiceService) {}
 
-  ngOnInit(): void { }
 
+
+  ngOnInit(): void {
+    
+    this.servicio.obtiene_datos().subscribe(resp => {
+      this.datos = resp;
+    });
+    
+   }
+
+  ngAfterViewInit(): void {
+    this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.columns().every(function () {
+        const that = this;
+        $('input', this.footer()).on('keyup change', function () {
+          if (that.search() !== this['value']) {
+            that
+              .search(this['value'])
+              .draw();
+          }
+        });
+      });
+    });
+  }
   seleccionado = 0;
+
+   ver_tabla() {
+    this.tabla = true;
+   }
 
   empezar() {
     sessionStorage.setItem('num_preg', '1');

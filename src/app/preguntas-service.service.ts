@@ -136,6 +136,8 @@ export class PreguntasServiceService {
     return this.clientHttp.get(this.Api + "/pregunta/total/quinta");
   }
 
-  
+  obtiene_datos(): Observable<any> {
+    return this.clientHttp.get(this.Api + "/pregunta/datos");
+  }
 
 }

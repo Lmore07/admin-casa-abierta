@@ -29,30 +29,44 @@
                     <option [value]="11">TOTAL DE NIVELES</option>
                 </select>
                 <div style="cursor: pointer;" class="botones">
-                    <button style="cursor: pointer;" [(ngModel)]="tabla" class="center" #boton>
+                    <button style="cursor: pointer;" (click)="ver_tabla()" class="center" #boton>
                         Ver Tabla ▶
                     </button>
                 </div>
-                <div>
-                    <table id="example" class="display" style="width:100%">
+                <div *ngIf="(tabla)">
+                    <table id="example" class="display" style="width:100%" datatable [dtOptions]="dtOptions">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>Carrera</th>
+                                <th>Primera Pregunta</th>
+                                <th>Segunda Pregunta</th>
+                                <th>Tercera Pregunta</th>
+                                <th>Cuarta Pregunta</th>
+                                <th>Quinta Pregunta</th>
+                                <th>Sexta Pregunta</th>
+                                <th>Septima Pregunta</th>
+                                <th>Octava Pregunta</th>
+                                <th>Novena Pregunta</th>
+                                <th>Decima Pregunta</th>
+                                <th>NIVEL</th>
+                                <th>PUNTAJE TOTAL</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let fila of datos">
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011-04-25</td>
-                                <td>$320,800</td>
+                                <td> {{fila.carrera}} </td>
+                                <td> {{fila.primera}} </td>
+                                <td> {{fila.segunda}} </td>
+                                <td> {{fila.tercera}} </td>
+                                <td> {{fila.cuarta}} </td>
+                                <td> {{fila.quinta}} </td>
+                                <td> {{fila.sexta}} </td>
+                                <td> {{fila.septima}} </td>
+                                <td> {{fila.octava}} </td>
+                                <td> {{fila.novena}} </td>
+                                <td> {{fila.decima}} </td>
+                                <td> {{fila.total_texto}} </td>
+                                <td> {{fila.total_puntaje}} </td>
                             </tr>
                             
                         </tbody>
