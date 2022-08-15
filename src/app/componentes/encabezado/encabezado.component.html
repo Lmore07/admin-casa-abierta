@@ -10,11 +10,11 @@
 
             <div class="caja-pregunta" #pregunta
                 style="text-align: center; font-size: 30px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
-                <b>TEST DE PERSONALIDAD</b>
+                <b>TEST DE PERSONALIDAD (RESULTADOS)</b>
             </div>
-<br>
+            <br>
             <div class="caja-pregunta" #pregunta style="text-align: center">
-                <select #escoge1 [(ngModel)]="seleccionado">
+                <select #escoge1 [(ngModel)]="seleccionado" id="select" (change)="elige_pregunta()">
                     <option [value]="0" selected disabled>--- Seleccione ---</option>
                     <option [value]="1">Primera Pregunta</option>
                     <option [value]="2">Segunda Pregunta</option>
@@ -28,39 +28,61 @@
                     <option [value]="10">Decima Pregunta</option>
                     <option [value]="11">TOTAL DE NIVELES</option>
                 </select>
-                <br>
-                <br>
                 <div style="cursor: pointer;" class="botones">
-                    <button style="cursor: pointer;" (click)="elige_pregunta()" class="center">
-                        Ver Resultado
+                    <button style="cursor: pointer;" [(ngModel)]="tabla" class="center" #boton>
+                        Ver Tabla ▶
                     </button>
                 </div>
+                <div>
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let fila of datos">
+                                <td>Tiger Nixon</td>
+                                <td>System Architect</td>
+                                <td>Edinburgh</td>
+                                <td>61</td>
+                                <td>2011-04-25</td>
+                                <td>$320,800</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <br>
+
                 <div *ngIf="(seleccionado!=0)" class="row align-items-center">
                     <div class="col">
-                     {{pregunta_texto}}
+                        {{pregunta_texto}}
                     </div>
                     <div class="col">
 
                     </div>
                     <div class="col">
                         <div class="center">
-                            <div >
+                            <div>
                                 <div class="chart">
-                                    <canvas baseChart 
-                                    [type]="'pie'" 
-                                    [datasets]="pieChartDatasets" 
-                                    [labels]="pieChartLabels"
-                                    [options]="pieChartOptions" 
-                                    [plugins]="pieChartPlugins" 
-                                    [legend]="pieChartLegend">
+                                    <canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets"
+                                        [labels]="pieChartLabels" [options]="pieChartOptions"
+                                        [plugins]="pieChartPlugins" [legend]="pieChartLegend">
                                     </canvas>
-    
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
 
             </div>
         </div>

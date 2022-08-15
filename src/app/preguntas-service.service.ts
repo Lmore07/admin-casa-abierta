@@ -136,5 +136,6 @@ export class PreguntasServiceService {
     return this.clientHttp.get(this.Api + "/pregunta/total/quinta");
   }
 
+  
 
 }
