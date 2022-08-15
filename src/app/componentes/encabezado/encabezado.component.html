@@ -14,27 +14,39 @@
             </div>
             <br>
             <div class="caja-pregunta" #pregunta style="text-align: center">
-                <select #escoge1 [(ngModel)]="seleccionado" id="select" (change)="elige_pregunta()">
-                    <option [value]="0" selected disabled>--- Seleccione ---</option>
-                    <option [value]="1">Primera Pregunta</option>
-                    <option [value]="2">Segunda Pregunta</option>
-                    <option [value]="3">Tercera Pregunta</option>
-                    <option [value]="4">Cuarta Pregunta</option>
-                    <option [value]="5">Quinta Pregunta</option>
-                    <option [value]="6">Sexta Pregunta</option>
-                    <option [value]="7">Septima Pregunta</option>
-                    <option [value]="8">Octava Pregunta</option>
-                    <option [value]="9">Novena Pregunta</option>
-                    <option [value]="10">Decima Pregunta</option>
-                    <option [value]="11">TOTAL DE NIVELES</option>
-                </select>
-                <div style="cursor: pointer;" class="botones">
-                    <button style="cursor: pointer;" (click)="ver_tabla()" class="center" #boton>
-                        Ver Tabla ▶
-                    </button>
+                <div class="row align-items-center">
+                    <div class="col">
+                        <select #escoge1 [(ngModel)]="seleccionado" id="select" (change)="elige_pregunta()">
+                            <option [value]="0" selected disabled>--- Seleccione ---</option>
+                            <option [value]="1">Primera Pregunta</option>
+                            <option [value]="2">Segunda Pregunta</option>
+                            <option [value]="3">Tercera Pregunta</option>
+                            <option [value]="4">Cuarta Pregunta</option>
+                            <option [value]="5">Quinta Pregunta</option>
+                            <option [value]="6">Sexta Pregunta</option>
+                            <option [value]="7">Septima Pregunta</option>
+                            <option [value]="8">Octava Pregunta</option>
+                            <option [value]="9">Novena Pregunta</option>
+                            <option [value]="10">Decima Pregunta</option>
+                            <option [value]="11">TOTAL DE NIVELES</option>
+                        </select> 
+                    </div>    
+                    <div class="col">
+                        <div style="cursor: pointer;" class="botones">
+                            <button style="cursor: pointer;" (click)="ver_tabla()" class="center" #boton>
+                                Ver Tabla ▶
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div *ngIf="(tabla)">
-                    <table id="example" class="display" style="width:100%" datatable [dtOptions]="dtOptions">
+                    <br>
+                    <div style="cursor: pointer;" class="botones">
+                        <button style="cursor: pointer;" (click)="exportExcel()" class="center" #boton>
+                            Guardar Excel
+                        </button>
+                    </div>
+                    <table id="example" class="table table-striped table-bordered" datatable [dtOptions]="dtOptions">
                         <thead>
                             <tr>
                                 <th>Carrera</th>
@@ -73,8 +85,6 @@
                     </table>
                 </div>
                 <br>
-                <br>
-
                 <div *ngIf="(seleccionado!=0)" class="row align-items-center">
                     <div class="col">
                         {{pregunta_texto}}

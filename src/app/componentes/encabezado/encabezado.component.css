@@ -3,7 +3,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    
 }
 
 .body{
@@ -130,5 +130,32 @@ breakpoint  {
 }
 
 .botones button:hover{
+    box-shadow: 0 6px 5px rgba(19, 28, 56, 0.26);
+}
+
+@media screen and (max-width: 50000px) {
+    table {
+      display: block;
+      overflow-x: auto;
+    }
+}
+
+  /* Remove IE arrow */
+
+  /* Custom Select wrapper */
+  select {
+    background-color: rgb(5, 196, 88); 
+    border-radius: 10px;
+    padding: 7px 15px;
+    outline: none;
+    border: 0;
+    font-size: 17px;
+    width: 200px;
+    color: white;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  select:hover{
     box-shadow: 0 6px 5px rgba(19, 28, 56, 0.26);
 }

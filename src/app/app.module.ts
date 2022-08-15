@@ -18,6 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PreguntasComponent } from './componentes/preguntas/preguntas.component';
 import { EncabezadoComponent } from './componentes/encabezado/encabezado.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

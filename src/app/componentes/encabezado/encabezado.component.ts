@@ -4,22 +4,25 @@ import { DataTableDirective } from 'angular-datatables';
 import Swal from 'sweetalert2';
 import { ChartOptions } from 'chart.js';
 import { PreguntasServiceService } from 'src/app/preguntas-service.service';
+import { Subject } from 'rxjs';
+import * as FileSaver from 'file-saver';
+
 
 @Component({
   selector: 'app-encabezado',
   templateUrl: './encabezado.component.html',
   styleUrls: ['./encabezado.component.css'],
 })
-export class EncabezadoComponent implements OnInit, AfterViewInit {
+export class EncabezadoComponent implements OnInit {
   //variables
   pregunta_texto: string;
   opcion_a: any;
   opcion_b: any;
-  opcion_c: any;
+  opcion_c: any
 // datatable
   @ViewChild(DataTableDirective)
   datatableElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {dom: 'Bfrtip'};
+  dtOptions: any = {};
 
   tabla=false;
   datos:any;
@@ -40,33 +43,21 @@ export class EncabezadoComponent implements OnInit, AfterViewInit {
 
   constructor(public ruta: Router, public servicio: PreguntasServiceService) {}
 
-
-
   ngOnInit(): void {
-    
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 3,
+      processing: true
+    };
     this.servicio.obtiene_datos().subscribe(resp => {
       this.datos = resp;
-    });
-    
+    });    
    }
 
-  ngAfterViewInit(): void {
-    this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.columns().every(function () {
-        const that = this;
-        $('input', this.footer()).on('keyup change', function () {
-          if (that.search() !== this['value']) {
-            that
-              .search(this['value'])
-              .draw();
-          }
-        });
-      });
-    });
-  }
   seleccionado = 0;
 
    ver_tabla() {
+    this.seleccionado=0;
     this.tabla = true;
    }
 
@@ -95,6 +86,7 @@ export class EncabezadoComponent implements OnInit, AfterViewInit {
   }
 
   elige_pregunta() {
+    this.tabla=false;
     if (this.seleccionado == 1) {
       this.servicio.obtiene_primera_prim().subscribe((resp) => {
         this.opcion_a = resp.total;
@@ -327,4 +319,18 @@ export class EncabezadoComponent implements OnInit, AfterViewInit {
       });
     }
   }
+
+  //excel button click functionality
+exportExcel() {
+  import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this.datos);
+      const workbook = { Sheets: { 'Resultados': worksheet }, SheetNames: ['Resultados'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer);
+  });
+}
+saveAsExcelFile(buffer: any): void {
+  var file = new Blob([buffer], {type: "application/vnd.ms-excel;charset=UTF-8"});
+  FileSaver.saveAs(file,"Resultados.xlsx");
+}
 }
