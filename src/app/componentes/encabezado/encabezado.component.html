@@ -1,0 +1,67 @@
+<div class="box" id="resultScreen">
+    <div class="body">
+        <div class="caja" id="screenPreguntas">
+
+            <div class="titulo">
+                <img width="4%" src="../../../assets/logo.jpg" />
+                ELABORADO POR INGENIERÍA EN SEGURIDAD INDUSTRIAL, 4TO "B"
+
+            </div>
+
+            <div class="caja-pregunta" #pregunta
+                style="text-align: center; font-size: 30px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                <b>TEST DE PERSONALIDAD</b>
+            </div>
+<br>
+            <div class="caja-pregunta" #pregunta style="text-align: center">
+                <select #escoge1 [(ngModel)]="seleccionado">
+                    <option [value]="0" selected disabled>--- Seleccione ---</option>
+                    <option [value]="1">Primera Pregunta</option>
+                    <option [value]="2">Segunda Pregunta</option>
+                    <option [value]="3">Tercera Pregunta</option>
+                    <option [value]="4">Cuarta Pregunta</option>
+                    <option [value]="5">Quinta Pregunta</option>
+                    <option [value]="6">Sexta Pregunta</option>
+                    <option [value]="7">Septima Pregunta</option>
+                    <option [value]="8">Octava Pregunta</option>
+                    <option [value]="9">Novena Pregunta</option>
+                    <option [value]="10">Decima Pregunta</option>
+                    <option [value]="11">TOTAL DE NIVELES</option>
+                </select>
+                <br>
+                <br>
+                <div style="cursor: pointer;" class="botones">
+                    <button style="cursor: pointer;" (click)="elige_pregunta()" class="center">
+                        Ver Resultado
+                    </button>
+                </div>
+                <div *ngIf="(seleccionado!=0)" class="row align-items-center">
+                    <div class="col">
+                     {{pregunta_texto}}
+                    </div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+                        <div class="center">
+                            <div >
+                                <div class="chart">
+                                    <canvas baseChart 
+                                    [type]="'pie'" 
+                                    [datasets]="pieChartDatasets" 
+                                    [labels]="pieChartLabels"
+                                    [options]="pieChartOptions" 
+                                    [plugins]="pieChartPlugins" 
+                                    [legend]="pieChartLegend">
+                                    </canvas>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
